@@ -42,7 +42,17 @@ public partial class StoreDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer($"Server={ConfigManager.Get("Server")};Database={ConfigManager.Get("Database")};Trusted_Connection={ConfigManager.Get("TrustedConnection")};TrustServerCertificate={ConfigManager.Get("TrustServerCertificate")};");
+    {
+        // Change if for optionsBuilder.UseSqlServer to switch between testing and running application!
+        
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseInMemoryDatabase("TestDatabase");
+        }
+
+        // => optionsBuilder.UseSqlServer($"Server={ConfigManager.Get("Server")};Database={ConfigManager.Get("Database")};Trusted_Connection={ConfigManager.Get("TrustedConnection")};TrustServerCertificate={ConfigManager.Get("TrustServerCertificate")};");
+    }
+    
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

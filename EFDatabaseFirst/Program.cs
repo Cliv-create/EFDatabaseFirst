@@ -8,6 +8,8 @@ namespace EFDatabaseFirst
     {
         static void Main(string[] args)
         {
+            // Un-comment code in DbContext.cs to work with database (not tests)
+            
             try
             {
                 if (System.IO.File.Exists("config.json"))
@@ -60,6 +62,7 @@ namespace EFDatabaseFirst
             {
                 Console.WriteLine(ex.Message);
             }
+            
         }
     }
 }
